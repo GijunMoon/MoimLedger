@@ -1,0 +1,125 @@
+﻿<!--
+### MoimLedger
+## Author: Gijun Moon
+## Date: 26-02-23
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settlement Results Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#9ed7ff",
+                        "accent-blue": "#9CD5FF",
+                        "background-light": "#F7F8F0",
+                        "background-dark": "#0f1b23"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: "Manrope", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
+<a class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" href="/upload/{{ result.session_id }}">
+<span class="material-symbols-outlined text-2xl">chevron_left</span>
+</a>
+<h1 class="text-lg font-bold tracking-tight">Settlement Results</h1>
+<div class="w-10 h-10"></div>
+</header>
+
+<main class="flex-1 overflow-y-auto px-4 pb-32">
+<section class="mt-6 space-y-4">
+<div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Expenditure</span>
+<span class="text-3xl font-extrabold mt-1 text-slate-900 dark:text-slate-50">{{ result.total_amount }}</span>
+</div>
+<div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-700 flex justify-between items-end">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Per Person</span>
+<span class="text-xl font-bold text-accent-blue">{{ result.per_person }}</span>
+</div>
+<div class="bg-primary/20 dark:bg-primary/10 px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-accent-blue font-bold">group</span>
+<span class="text-xs font-bold text-accent-blue">{{ result.member_list|length }} Members</span>
+</div>
+</div>
+</div>
+</section>
+
+<section class="mt-8 flex items-center justify-between">
+<h3 class="text-base font-bold text-slate-900 dark:text-slate-100">Member Breakdown</h3>
+<span class="text-xs text-slate-400">Calculated</span>
+</section>
+
+<section class="mt-4 space-y-3">
+{% for s in result.settlement %}
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center gap-4">
+<div class="flex-1 min-w-0">
+<p class="font-bold text-slate-900 dark:text-slate-100 truncate">{{ s.name }}</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Paid: {{ s.paid }}</p>
+</div>
+<div class="text-right">
+{% if s.balance > 0 %}
+<span class="inline-block px-2 py-1 rounded-lg bg-primary/20 dark:bg-primary/10 text-accent-blue text-[10px] font-bold uppercase tracking-wide">To Receive</span>
+<p class="text-sm font-bold text-accent-blue mt-1">+{{ s.balance }}</p>
+{% elif s.balance < 0 %}
+<span class="inline-block px-2 py-1 rounded-lg bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-[10px] font-bold uppercase tracking-wide">To Give</span>
+<p class="text-sm font-bold text-orange-600 mt-1">{{ s.balance }}</p>
+{% else %}
+<span class="inline-block px-2 py-1 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[10px] font-bold uppercase tracking-wide">Settled</span>
+<p class="text-sm font-bold text-slate-400 mt-1">0</p>
+{% endif %}
+</div>
+</div>
+{% endfor %}
+</section>
+
+{% if result.transfers %}
+<section class="mt-8">
+<h3 class="text-base font-bold text-slate-900 dark:text-slate-100">Recommended Transfers</h3>
+<div class="mt-3 space-y-2">
+{% for t in result.transfers %}
+<div class="rounded-xl bg-white dark:bg-slate-800 p-3 text-sm border border-slate-100 dark:border-slate-700">
+{{ t.from }} -> {{ t.to }} : {{ t.amount }}
+</div>
+{% endfor %}
+</div>
+</section>
+{% endif %}
+</main>
+
+<div class="fixed bottom-0 left-0 right-0 p-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 space-y-3">
+<div class="flex gap-3">
+<a class="flex-1 flex items-center justify-center gap-2 py-3 px-4 border-2 border-primary text-slate-800 dark:text-slate-100 font-bold rounded-xl" href="/download-excel/{{ result.session_id }}">
+<span class="material-symbols-outlined text-xl">description</span>
+Download Excel
+</a>
+<a class="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-primary text-slate-900 font-bold rounded-xl shadow-lg shadow-primary/20" href="/download-pdf/{{ result.session_id }}">
+<span class="material-symbols-outlined text-xl">picture_as_pdf</span>
+Download PDF
+</a>
+</div>
+</div>
+</body>
+</html>

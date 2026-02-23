@@ -1,0 +1,201 @@
+<!--
+### MoimLedger
+## Author: Gijun Moon
+## Date: 26-02-23
+-->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Moim Ledger Dashboard</title>
+<!-- Tailwind CSS with essential plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#9ed7ff",
+                        "background-light": "#F7F8F0",
+                        "background-dark": "#0f1b23",
+                        "slate-custom": "#1e293b",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Status Bar Spacer (iOS simulation) -->
+<div class="h-12 w-full"></div>
+<!-- Header Section -->
+<header class="px-6 py-4 flex items-center justify-between sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary flex items-center justify-center shadow-sm overflow-hidden">
+<img alt="User Profile" class="size-full object-cover" data-alt="User profile avatar icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMGl7x2Xt2wxtnLU_4NLeBpkNhFUO_pRiwySbORv74RNAiV30Lx6GtDFjPFtw5fWoR8Mrb_iPxkvF8suUTAGs48PfoR8jPTjOeI7RNF9GVLZvZOUBrHejwpUkFSjWpQ492WT1lJvQfdKTn2WWAJNQO3SV-zd17yzkouegBkbdnCcxbn_0YXX_o1gIFC5iYPD1jgOgnOp_TyUoao72MY9WuB8P-W3YrksYGTRzOED1MduvjOVfTGpNI_TZQUPAm08OCULIuEJdpL7Pk"/>
+</div>
+<div>
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400">Welcome back,</p>
+<h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-slate-100">Moim Ledger</h1>
+</div>
+</div>
+<button class="size-10 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">notifications</span>
+</button>
+</header>
+<main class="flex-1 px-6 pb-24 overflow-y-auto">
+<!-- Quick Stats Grid -->
+<div class="grid grid-cols-2 gap-4 mt-6">
+<div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Total Groups</p>
+<p class="text-2xl font-extrabold mt-1 text-slate-900 dark:text-slate-100">12</p>
+<div class="mt-2 text-[10px] font-bold text-emerald-500 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full inline-block">+2 this month</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">To Settle</p>
+<p class="text-2xl font-extrabold mt-1 text-slate-900 dark:text-slate-100">₩45k</p>
+<div class="mt-2 text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full inline-block">3 pending</div>
+</div>
+</div>
+<!-- Active Session Card (Hero) -->
+<section class="mt-8">
+<h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">Live Activity</h2>
+<div class="relative overflow-hidden bg-slate-900 dark:bg-slate-800 rounded-2xl p-6 text-white shadow-xl group">
+<!-- Abstract Background Pattern -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+<div class="absolute bottom-0 left-0 w-24 h-24 bg-primary/10 rounded-full -ml-12 -mb-12 blur-2xl"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-primary">Active Session</span>
+</div>
+<h3 class="text-xl font-bold">Friday Dinner @ Gangnam</h3>
+<p class="text-slate-400 text-sm mt-1">4 members • Started 20 mins ago</p>
+<div class="mt-6 flex items-center justify-between">
+<div class="flex -space-x-2">
+<img class="size-8 rounded-full border-2 border-slate-900" data-alt="Team member 1 profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAdTiiTsFGKY3T2jHcQ-X21srQqTA3f7zrg75kB-up8bYsHWJuC5IOXzS-MgCNirEIeBtWouZWd2I5hIenoIQ77OEsy8RmWPWVFnDWEfXkoJf-gS69oqAgKtZcXKpLoqvIKmS2BWlqUu_g6Bq5Fp0pGN6FcjUsZJQYy29IhNeNFLB3qQVasHBbDqKjuuTAPh4MzRhN_B8IRy1-DkiSQ4gW_KWqVtOX_YHRbHkGK3jyeU8aA5-bzDh8bQlJiAvPA9ns0IpAtUaHf02r"/>
+<img class="size-8 rounded-full border-2 border-slate-900" data-alt="Team member 2 profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwRnXkL774mMU8m9ogMJAk_4jXitXX8p5meun6ibNOdqA4DB18Ba5rXTzECggyprti9gAcXzX1Yw8klqissUyy0NLeXjprzifUvpXQ5jnHmptXalIxfZfZQf7TD2aemi2YeitOn2R2OtCY4l1xc5LU7T8_OOLLGVzOvJ9mzwebD5sCTDZSO7ioTgbuZPOAYkUeqCx3V9GWfQkODqa6M7GksTJqLp8EJIB3is2gOcj_FCM1Be2rie2nWLfvO-XUpikePAlTEeV6NAdK"/>
+<img class="size-8 rounded-full border-2 border-slate-900" data-alt="Team member 3 profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXepRQSnEnSI6m0znxZMqD_FyjhK9FINxBTURS-4FcgZOot1BVLyAVKLsVBD55dzoVLJZfC-C6DZeDrG1MBNhdtJVRbhfPJ0XLYx9hszhAoU6Uf2a7sgvtWChUGm9XhferuFqtROshd_xXw2yl3biYXfE3rqjfkD3z_jendJcmRjprw0LSwffhhPW9rJMZ-jXRaghCeu6lHBk6Te6X10pTc43MAT8HCL72Oc4oMId4jvzcRk4LcwlrWMAXo6_RHU__uST7jSew0jzk"/>
+<div class="size-8 rounded-full bg-slate-700 border-2 border-slate-900 flex items-center justify-center text-[10px] font-bold">+1</div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-slate-900 font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-95">
+                            Start Tracking
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- New Meeting Form -->
+<form action="/create-session" method="post" class="w-full mt-6 space-y-3">
+<input class="w-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 placeholder:text-slate-400" name="members" placeholder="이름을 콤마로 입력 (예: 민수, 지연, 상혁)" required="" type="text"/>
+<button class="w-full flex items-center justify-center gap-3 bg-white dark:bg-slate-800 border-2 border-dashed border-primary/40 dark:border-primary/20 hover:border-primary py-4 rounded-2xl transition-all active:scale-[0.98]" type="submit">
+<span class="material-symbols-outlined text-primary">add_circle</span>
+<span class="font-bold text-slate-700 dark:text-slate-200">New Meeting</span>
+</button>
+</form>
+<!-- Recent Meetings List -->
+<section class="mt-8">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">Recent Meetings</h2>
+<button class="text-xs font-bold text-primary">View All</button>
+</div>
+<div class="space-y-3">
+<!-- Meeting Item 1 -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="size-12 rounded-xl bg-orange-100 dark:bg-orange-500/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-600 dark:text-orange-400">restaurant</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Team Lunch</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Yesterday • 5 members</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-slate-900 dark:text-slate-100">₩124,000</p>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500">Settled</span>
+</div>
+</div>
+<!-- Meeting Item 2 -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="size-12 rounded-xl bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400">local_bar</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Friday Night Out</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Oct 24 • 8 members</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-slate-900 dark:text-slate-100">₩315,000</p>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/20 text-blue-600 dark:text-primary">Pending</span>
+</div>
+</div>
+<!-- Meeting Item 3 -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 opacity-80">
+<div class="size-12 rounded-xl bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-purple-600 dark:text-purple-400">movie</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Movie Night</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Oct 20 • 3 members</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-slate-900 dark:text-slate-100">₩45,000</p>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500">Settled</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 pb-8 pt-3 px-8 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-primary group-active:scale-90 transition-transform" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-tighter">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 group-active:scale-90 transition-transform">history</span>
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-tighter">History</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 group-active:scale-90 transition-transform">group</span>
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-tighter">Groups</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500 group-active:scale-90 transition-transform">settings</span>
+<span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-tighter">Settings</span>
+</a>
+</nav>
+</body></html>
